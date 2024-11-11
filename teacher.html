@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher - Enroll Results</title>
+  <style>
+    body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .container { width: 400px; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Teacher Login</h2>
+  <input type="password" id="password" placeholder="Enter Password">
+  <button onclick="verifyPassword()">Login</button>
+  
+  <div id="enrollForm" class="hidden">
+    <h3>Enroll Student Result</h3>
+    <input type="number" id="rollNumber" placeholder="Roll Number">
+    <input type="number" id="physics" placeholder="Physics Marks">
+    <input type="number" id="maths" placeholder="Maths Marks">
+    <input type="number" id="biology" placeholder="Biology Marks">
+    <input type="number" id="chemistry" placeholder="Chemistry Marks">
+    <input type="number" id="bengali" placeholder="Bengali Marks">
+    <input type="number" id="english" placeholder="English Marks">
+    <input type="number" id="computer" placeholder="Computer Science Marks">
+    <button onclick="enrollResult()">Enroll Result</button>
+    <p id="message"></p>
+  </div>
+</div>
+
+<script>
+  function verifyPassword() {
+    const password = document.getElementById('password').value;
+    if (password === "VVHS2024") {
+      document.getElementById('enrollForm').classList.remove('hidden');
+      document.getElementById('password').style.display = 'none';
+    } else {
+      alert("Incorrect password.");
+    }
+  }
+
+  function enrollResult() {
+    const rollNumber = document.getElementById('rollNumber').value;
+    const physics = document.getElementById('physics').value;
+    const maths = document.getElementById('maths').value;
+    const biology = document.getElementById('biology').value;
+    const chemistry = document.getElementById('chemistry').value;
+    const bengali = document.getElementById('bengali').value;
+    const english = document.getElementById('english').value;
+    const computer = document.getElementById('computer').value;
+
+    if (rollNumber && physics && maths && biology && chemistry && bengali && english && computer) {
+      const studentResult = { physics, maths, biology, chemistry, bengali , english , computer };
+      localStorage.setItem(`result_${rollNumber}`, JSON.stringify(studentResult));
+      document.getElementById('message').textContent = "Result enrolled successfully!";
+    } else {
+      alert("Please fill out all fields.");
+    }
+  }
+</script>
+
+</body>
+</html>

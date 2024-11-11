@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Result</title>
+  <style>
+    body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .container { width: 400px; text-align: center; }
+    p { font-size: 1.2rem; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Student Result</h2>
+  <p id="result"></p>
+</div>
+
+<script>
+  function getQueryParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  function displayResult() {
+    const rollNumber = getQueryParameter("rollNumber");
+    const result =localStorage.getItem(`result_${rollNumber}`);
+    
+    if (result) {
+      const data = JSON.parse(result);
+      document.getElementById('result').innerHTML = `
+        <strong>Roll Number:</strong> ${rollNumber}<br>
+        <strong>Physics:</strong> ${data.physics}<br>
+        <strong>Maths:</strong> ${data.maths}<br>
+        <strong>Biology:</strong> ${data.biology}<br>
+        <strong>Chemistry:</strong> ${data.chemistry}<br>
+        <strong>Bengali:</strong> ${data.bengali}<br>
+        <strong>English:</strong> ${data.english}<br>
+        <strong>Computer Science:</strong> ${data.computer}
+      `;
+    } else {
+      document.getElementById('result').textContent = "No result found for this roll number.";
+    }
+  }
+
+  displayResult();
+</script>
+
+</body>
+</html>
